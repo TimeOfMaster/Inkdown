@@ -9,11 +9,14 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/cli.js",
-    "ink": "node dist/cli.js"
+    "ink": "node dist/cli.js",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs"
   },
   "dependencies": {
     "@types/markdown-it-footnote": "^3.0.4",
     "@types/yargs": "^17.0.33",
+    "lucide-vue-next": "^0.525.0",
     "markdown-it": "^14.1.0",
     "markdown-it-footnote": "^4.0.0",
     "puppeteer": "^24.12.1",
@@ -23,6 +26,8 @@
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^24.0.13",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.17"
   }
 }

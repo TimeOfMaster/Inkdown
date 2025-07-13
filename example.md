@@ -45,7 +45,7 @@ fibonacci(100)
 
 ## Citations
 
-Inkdown supports special styling for citations to mimic academic papers. You can use Markdown-style footnotes for this. For example, here's a citation [^citation1].
+Inkdown supports special styling for citations to mimic academic papers [^citation1]. You can use Markdown-style footnotes for this. For example, here's a citation [^citation1].
 
 Another example of a citation [^citation2].
 

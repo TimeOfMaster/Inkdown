@@ -1,4 +1,3 @@
-import { text } from 'stream/consumers'
 import { DefaultTheme, defineConfig } from 'vitepress'
 
 export default defineConfig({
@@ -26,6 +25,11 @@ export default defineConfig({
     footer: {
       message: 'Released under the ISC License.',
       copyright: 'Copyright © 2025-present Tim Eschmann'
+    }
+  },
+  vite: {
+    optimizeDeps: {
+      exclude: ['yargs']
     }
   }
 })

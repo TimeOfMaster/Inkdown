@@ -11,7 +11,8 @@
     "start": "node dist/cli.js",
     "ink": "node dist/cli.js",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs"
+    "docs:build": "vitepress build docs",
+    "docs:deploy": "gh-pages -d docs/.vitepress/dist"
   },
   "dependencies": {
     "@types/markdown-it-footnote": "^3.0.4",
@@ -26,6 +27,7 @@
     "@catppuccin/vitepress": "^0.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^24.0.13",
+    "gh-pages": "^6.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "vitepress": "^1.6.3",

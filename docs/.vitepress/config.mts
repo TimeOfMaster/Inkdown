@@ -1,9 +1,9 @@
 import { DefaultTheme, defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/inkdown/',
   title: "Inkdown",
   head: [
-    ['link', { rel: 'stylesheet', href: '/theme/custom.css' }],
     /* 
     * Icon from Lucide (https://lucide.dev/)
     * ISC License

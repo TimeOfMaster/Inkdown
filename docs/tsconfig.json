@@ -8,6 +8,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["./.vitepress/**/*.ts", "./.vitepress/**/*.vue"],
+  "include": ["./.vitepress/**/*.ts", "./.vitepress/**/*.vue", ".vitepress/config.mts"],
   "exclude": ["node_modules"]
 }

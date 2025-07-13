@@ -16,25 +16,19 @@ export async function convert(markdownFile: string, cssFile?: string) {
   const pdfOutPath = path.resolve(markdownFile.replace(/\.md$/, '.pdf'));
 
   // Convert Markdown to HTML
-  const md = new MarkdownIt().use(footnote);
+  const md = new MarkdownIt('commonmark').use(footnote);
   const markdown = fs.readFileSync(mdPath, 'utf-8');
   const htmlContent = md.render(markdown);
 
-  // Inject CSS
+  const templateHtml = fs.readFileSync(
+    path.resolve(__dirname, '../template/template.html'),
+    'utf-8'
+  );
   const css = fs.readFileSync(cssPath, 'utf-8');
-  const fullHtml = `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Markdown PDF</title>
-    <style>${css}</style>
-  </head>
-  <body>
-  ${htmlContent}
-  </body>
-  </html>
-  `;
+  const styleHtml = `<style>${css}</style>`;
+  const fullHtml = templateHtml
+    .replace('{{style}}', styleHtml)
+    .replace('{{content}}', htmlContent);
 
   // Save HTML
   fs.writeFileSync(htmlOutPath, fullHtml, 'utf-8');

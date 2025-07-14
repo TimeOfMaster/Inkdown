@@ -1,7 +1,7 @@
 import { DefaultTheme, defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/inkdown/',
+  base: '/Inkdown/',
   title: "Inkdown",
   head: [
     /* 

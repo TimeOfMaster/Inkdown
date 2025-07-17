@@ -49,6 +49,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'What is Inkdown?', link: '/guide/' },
         { text: 'Installation', link: '/guide/installation' },
+        { text: 'Features', link: '/guide/features' },
       ]
     }
   ]

@@ -71,6 +71,15 @@ a:hover {
   border-bottom-color: #B0C4DE; /* A slightly darker blue for hover effect */
 }
 
+/* --- Lists --- */
+ul, ol {
+  padding-left: 2em;
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
 /* --- Citations (Markdown Footnotes) --- */
 /* Style for the footnote reference in the text */
 sup.footnote-ref a {
@@ -162,4 +171,39 @@ blockquote {
   padding-left: 1.5em;
   border-left: 4px solid var(--border-color);
   color: #666;
+}
+
+/* --- Callouts --- */
+.note, .warning, .info, .tip {
+  padding: 1em 1.5em;
+  border-left: 5px solid;
+  border-radius: 4px;
+  margin: 2em 0;
+  background-color: #f8f9fa;
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
+.note {
+  border-color: #6ab0f3;
+}
+
+.warning {
+  border-color: #f0ad4e;
+}
+
+.info {
+  border-color: #5bc0de;
+}
+
+.tip {
+  border-color: #5cb85c;
+}
+
+.note .container-title,
+.warning .container-title,
+.info .container-title,
+.tip .container-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
 }

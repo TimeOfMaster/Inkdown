@@ -6,3 +6,7 @@ dist
 # VitePress
 docs/.vitepress/cache/*
 docs/.vitepress/dist/*
+
+*.html
+!templates/*.html
+*.pdf

@@ -20,6 +20,28 @@ An ordered list:
 
 ---
 
+## Callouts
+
+You can use callouts to highlight important information.
+
+::: note
+This is a note.
+:::
+
+::: warning
+This is a warning.
+:::
+
+::: tip
+This is a tip.
+:::
+
+::: info
+This is an info block.
+:::
+
+---
+
 ## Code Blocks
 
 Syntax highlighting is supported for a variety of languages. Here are a few examples.

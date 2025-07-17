@@ -37,7 +37,7 @@ export async function convert(markdownFile: string, cssFile?: string) {
   // Render to PDF using Puppeteer
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
+  await page.goto(`file://${htmlOutPath}`, { waitUntil: 'networkidle0' });
 
   await page.pdf({
     path: pdfOutPath,

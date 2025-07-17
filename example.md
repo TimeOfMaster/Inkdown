@@ -65,6 +65,12 @@ def fibonacci(n):
 fibonacci(100)
 ```
 
+## Images
+
+You can embed images in your document.
+
+![A placeholder image](https://placehold.co/600x200.png "Placeholder Image")
+
 ## Citations
 
 Inkdown supports special styling for citations to mimic academic papers [^citation1]. You can use Markdown-style footnotes for this. For example, here's a citation [^citation1].

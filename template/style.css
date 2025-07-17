@@ -173,6 +173,14 @@ blockquote {
   color: #666;
 }
 
+/* --- Images --- */
+img {
+  max-width: 100%;
+  height: auto;
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
+
 /* --- Callouts --- */
 .note, .warning, .info, .tip {
   padding: 1em 1.5em;

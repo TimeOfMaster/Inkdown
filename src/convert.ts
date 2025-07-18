@@ -29,7 +29,7 @@ export async function convert(markdownFile: string, cssFile?: string) {
   const htmlContent = md.render(markdown);
 
   const katexCSS = fs.readFileSync(
-    path.resolve(process.cwd(), 'node_modules/katex/dist/katex.min.css'),
+    path.resolve(__dirname, '../node_modules/katex/dist/katex.min.css'),
     'utf-8'
   );
 

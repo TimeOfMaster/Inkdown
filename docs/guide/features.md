@@ -46,6 +46,20 @@ This is an info block. It can be used for supplementary details or context.
 :::
 ```
 
+## Math and Equation Support (LaTeX)
+
+Inkdown supports LaTeX for rendering mathematical formulas.
+
+Inline math is written with single dollar signs: `$E = mc^2`
+
+Block-level equations are written with double dollar signs:
+
+```latex
+$$
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+```
+
 ## Image Embedding
 
 You can embed images in your documents using the standard Markdown syntax. Inkdown will automatically handle local and remote images.

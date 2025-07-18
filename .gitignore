@@ -10,3 +10,8 @@ docs/.vitepress/dist/*
 *.html
 !templates/*.html
 *.pdf
+
+# NSIS Installer
+*.exe
+inkdown.bat.tmp
+installer/node-v22.17.1-win-x64/*

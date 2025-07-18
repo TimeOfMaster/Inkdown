@@ -63,7 +63,7 @@ Section "Inkdown Core Files" SEC01
 
   ; --- Create Launcher Script (inkdown.bat) ---
   SetOutPath "$INSTDIR" ; Place the launcher in the root of the install dir
-  File "inkdown.bat.tmp"
+  File "inkdown.bat.in"
 
   ; --- Create Shortcuts ---
   CreateShortCut "$DESKTOP\Inkdown.lnk" "$INSTDIR\inkdown.bat" "" "" 0 SW_SHOWNORMAL "" "Run Inkdown CLI"

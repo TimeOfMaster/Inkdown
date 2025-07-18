@@ -6,6 +6,7 @@ dist
 # VitePress
 docs/.vitepress/cache/*
 docs/.vitepress/dist/*
+.vitepress/*
 
 *.html
 !templates/*.html
@@ -13,5 +14,5 @@ docs/.vitepress/dist/*
 
 # NSIS Installer
 *.exe
-inkdown.bat.tmp
 installer/node-v22.17.1-win-x64/*
+!installer/inkdown.bat.in

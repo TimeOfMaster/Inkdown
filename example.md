@@ -65,6 +65,18 @@ def fibonacci(n):
 fibonacci(100)
 ```
 
+## Math and Equations
+
+Inkdown supports LaTeX for rendering mathematical formulas.
+
+Inline math is written with single dollar signs: $E = mc^2$.
+
+Block-level equations are written with double dollar signs:
+
+$$
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+$$
+
 ## Images
 
 You can embed images in your document.

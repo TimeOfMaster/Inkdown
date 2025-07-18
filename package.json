@@ -15,6 +15,7 @@
     "docs:deploy": "npm run docs:build && gh-pages -d docs/.vitepress/dist"
   },
   "dependencies": {
+    "@mdit/plugin-katex": "^0.23.1",
     "@types/markdown-it-container": "^2.0.10",
     "@types/markdown-it-footnote": "^3.0.4",
     "@types/yargs": "^17.0.33",

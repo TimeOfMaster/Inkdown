@@ -6,6 +6,7 @@ import MarkdownIt from 'markdown-it';
 import puppeteer from 'puppeteer';
 import footnote from 'markdown-it-footnote';
 import container from 'markdown-it-container';
+import { katex } from '@mdit/plugin-katex';
 
 export async function convert(markdownFile: string, cssFile?: string) {
   // Paths
@@ -17,16 +18,28 @@ export async function convert(markdownFile: string, cssFile?: string) {
   const pdfOutPath = path.resolve(markdownFile.replace(/\.md$/, '.pdf'));
 
   // Convert Markdown to HTML
-  const md = new MarkdownIt('commonmark').use(footnote).use(container, 'note').use(container, 'warning').use(container, 'info').use(container, 'tip');
+  const md = new MarkdownIt('default')
+    .use(footnote)
+    .use(container, 'note')
+    .use(container, 'warning')
+    .use(container, 'info')
+    .use(container, 'tip')
+    .use(katex, { output: "html" });
   const markdown = fs.readFileSync(mdPath, 'utf-8');
   const htmlContent = md.render(markdown);
+
+  const katexCSS = fs.readFileSync(
+    path.resolve(process.cwd(), 'node_modules/katex/dist/katex.min.css'),
+    'utf-8'
+  );
 
   const templateHtml = fs.readFileSync(
     path.resolve(__dirname, '../template/template.html'),
     'utf-8'
   );
   const css = fs.readFileSync(cssPath, 'utf-8');
-  const styleHtml = `<style>${css}</style>`;
+  const styleHtml = `<style>${katexCSS}
+${css}</style>`;
   const fullHtml = templateHtml
     .replace('{{style}}', styleHtml)
     .replace('{{content}}', htmlContent);

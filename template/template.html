@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>Markdown PDF</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" integrity="sha384-DotATh02A0Kyle1/SqO+Gz5oANP2e7Rux3OCyS1+p3V7gMvIsAOr8nKR1s33EbGz" crossorigin="anonymous">
   {{style}}
 </head>
 <body>
   <div id="page">
     {{content}}
   </div>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-yFRtMMDnQtDRO5QXlYlGUu6K/KL9w6H9bFHfFVgC5tZzOEEPCBB8oU5gyP5SGZg" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43ziOfroKIXXuSSPYNPEGyOyVggadwNCVPC9dyj/GNjVkqqTloZ/ephXL4T8qOEQ" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 </body>
 </html>

@@ -1,10 +1,12 @@
 ; inkdown_installer.nsi
 ; This script creates a standalone Windows installer for Inkdown.
 
+!include WinMessages.nsh
+
 ; --- General Installer Settings ---
 Name "Inkdown"
 OutFile "Inkdown_Installer_v0.1.0.exe" ; Output installer filename.
-InstallDir "$PROGRAMFILES\Inkdown" ; Default installation directory
+InstallDir "$PROGRAMFILES64\Inkdown" ; Default installation directory
 RequestExecutionLevel admin ; Request administrator privileges for installation
 
 ; --- Pages ---
@@ -15,32 +17,6 @@ Page instfiles
 UninstallText "This will uninstall Inkdown. Do you wish to continue?"
 UninstallCaption "Uninstall Inkdown"
 !define MUI_ABORTWARNING ; Show a warning if the user tries to abort uninstallation
-
-; --- Variables ---
-Var /GLOBAL NODEJS_DIR_NAME ; To store the name of the Node.js portable directory (e.g., node-v20.11.0-win-x64)
-
-; --- Functions ---
-; Function to find the Node.js portable directory name
-Function .onInit
-  StrCpy $NODEJS_DIR_NAME ""
-  ; Loop through directories in the installer's source directory
-  FindFirst $0 $1 "$EXEDIR\node-v*-win-x64"
-  loop:
-    StrCmp $1 "" done
-    StrCmp $1 "." next
-    StrCmp $1 ".." next
-    StrCpy $NODEJS_DIR_NAME $1
-    Goto done
-  next:
-    FindNext $0 $1
-    Goto loop
-  done:
-  FindClose $0
-
-  StrCmp $NODEJS_DIR_NAME "" 0 +2
-    MessageBox MB_OK|MB_ICONSTOP "Error: Portable Node.js directory (e.g., node-vX.Y.Z-win-x64) not found next to the installer. Please ensure it's extracted and present."
-    Abort
-FunctionEnd
 
 ; --- Sections ---
 Section "Inkdown Core Files" SEC01
@@ -59,15 +35,11 @@ Section "Inkdown Core Files" SEC01
   ; Copy Inkdown application files (dist and relevant node_modules)
   SetOutPath "$INSTDIR\app"
   File /r "..\dist\*" ; Copies your compiled Inkdown JavaScript files from the parent directory
-  File /r "..\node_modules\puppeteer\*" ; Copies Puppeteer and its Chromium binaries from the parent directory
+  File /r "..\node_modules" ; Copies the node_modules directory and its contents into $INSTDIR\app\node_modules
 
   ; --- Create Launcher Script (inkdown.bat) ---
   SetOutPath "$INSTDIR" ; Place the launcher in the root of the install dir
-  File "inkdown.bat.in"
-
-  ; --- Create Shortcuts ---
-  CreateShortCut "$DESKTOP\Inkdown.lnk" "$INSTDIR\inkdown.bat" "" "" 0 SW_SHOWNORMAL "" "Run Inkdown CLI"
-  CreateShortCut "$SMPROGRAMS\Inkdown\Inkdown.lnk" "$INSTDIR\inkdown.bat" "" "" 0 SW_SHOWNORMAL "" "Run Inkdown CLI"
+  File /oname=inkdown.bat "inkdown.bat.in"
 
   ; --- Write Uninstaller ---
   WriteUninstaller "$INSTDIR\Uninstall Inkdown.exe"
@@ -85,14 +57,36 @@ Section "Uninstall"
   Delete "$INSTDIR\inkdown.bat"
   RMDir /r "$INSTDIR\app"
   RMDir /r "$INSTDIR\nodejs"
-  RMDir "$INSTDIR" ; Delete the main installation directory if empty
 
   ; Delete shortcuts
   Delete "$DESKTOP\Inkdown.lnk"
-  Delete "$SMPROGRAMS\Inkdown\Inkdown.lnk"
-  RMDir "$SMPROGRAMS\Inkdown" ; Delete start menu folder if empty
+  ClearErrors
 
   ; Delete registry entries
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Inkdown"
+
+  ; Remove installation directory from PATH
+  ReadRegStr $0 HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path"
+  StrCpy $R1 ""
+  StrLen $R2 "$INSTDIR"
+  loop:
+    StrCmp $R0 $0 $R2
+    StrCmp $R0 "$INSTDIR" 0 +3
+      StrCpy $0 $0 $R2 "$INSTDIR"
+      Goto continue
+    StrCpy $R0 $0 1
+    StrCmp $R0 ";" 0 +2
+      StrCpy $R1 "$R1$R0"
+    StrCpy $0 $0 "1"
+    StrCmp $0 "" 0 loop
+  continue:
+  WriteRegExpandStr HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment" "Path" "$R1"
+  SendMessage ${HWND_BROADCAST} ${WM_SETTINGCHANGE} 0 "System\Environment"
+
+  ; Create and execute a self-deleting batch file to remove the installation directory
+  SetOutPath "$TEMP"
+  File /oname=uninstall_inkdown.bat "uninstall_inkdown.bat.in"
+  ExecShell "" "$TEMP\uninstall_inkdown.bat" "$INSTDIR"
+  Quit ; Force the uninstaller GUI to close
 
 SectionEnd

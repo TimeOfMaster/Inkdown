@@ -1,6 +1,6 @@
 {
   "name": "inkdown",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A CLI to convert markdown to PDF",
   "main": "dist/cli.js",
   "bin": {

@@ -31,5 +31,6 @@ import { convert } from './convert';
     )
     .help()
     .alias('h', 'help')
+    .version()
     .parse();
 })();
